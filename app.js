@@ -26,10 +26,10 @@ app.get('/movie', (req, res)=>{
     let { genre, country, avg_vote } = req.query;
     let muteMovies = movies;
     if(genre){
-        muteMovies= muteMovies.filter(movie=>movie.genre.toLowerCase()= genre.toLowerCase());
+        muteMovies= muteMovies.filter(movie=>movie.genre.toLowerCase()=== genre.toLowerCase());
     }
     if(country){
-        muteMovies= muteMovies.filter(movie=>movie.country.toLowerCase()=country.toLowerCase());
+        muteMovies= muteMovies.filter(movie=>movie.country.toLowerCase()===country.toLowerCase());
     }
     if(avg_vote){
         if(isNaN(avg_vote)|| avg_vote <1 || avg_vote >10 ){
