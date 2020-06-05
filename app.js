@@ -23,7 +23,7 @@ app.use(function validateBearerToken(req, res, next) {
   
 
 app.get('/movie', (req, res)=>{
-    let { genre, country, average_vote } = req.query;
+    let { genre, country, avg_vote } = req.query;
     let muteMovies = movies;
     if(genre){
         muteMovies= muteMovies.filter(movie=>movie.genre.toLowerCase()= genre.toLowerCase());
@@ -31,14 +31,13 @@ app.get('/movie', (req, res)=>{
     if(country){
         muteMovies= muteMovies.filter(movie=>movie.country.toLowerCase()=country.toLowerCase());
     }
-    if(average_vote){
-        if(isNaN(average_vote)|| average_vote <1 || average_vote >10 ){
+    if(avg_vote){
+        if(isNaN(avg_vote)|| avg_vote <1 || avg_vote >10 ){
             return res
             .status(400)
             .send('Sort must be a number between 1 and 10');
         }
-        muteMovies= muteMovies.filter(Number(movie => movie.avg_vote) >= Number(average_vote));
-     
+        muteMovies= muteMovies.filter((movie) => Number(movie.avg_vote) >= Number(avg_vote));
     }
     
     res.send(muteMovies);
